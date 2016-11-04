@@ -57,6 +57,8 @@ func (t *SimpleChaincode) Invoke(stub *shim.ChaincodeStub, function string, args
 		return t.Init(stub, "init", args)
 	} else if function == "write" {
 		return t.write(stub, args)
+	} else if function == "delete" {
+		return t.delete(stub, args)
 	}
 	fmt.Println("invoke did not find func: " + function)
 
@@ -113,3 +115,21 @@ func (t *SimpleChaincode) read(stub *shim.ChaincodeStub, args []string) ([]byte,
 
 	return valAsbytes, nil
 }
+func (t *SimpleChaincode) delete(stub *shim.ChaincodeStub, args []string) ([]byte, error) {
+	var key string
+	var err error
+	fmt.Println("running delete()")
+
+	if len(args) != 1 {
+		return nil, errors.New("Incorrect number of arguments. Expecting 2. name of the key and value to set")
+	}
+
+	key = args[0] //rename for funsies
+
+	err = stub.DelState(key) //del the variable into the chaincode state
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
+}
+
