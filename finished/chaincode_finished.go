@@ -72,6 +72,8 @@ func (t *SimpleChaincode) Query(stub *shim.ChaincodeStub, function string, args 
 	// Handle different functions
 	if function == "read" { //read a variable
 		return t.read(stub, args)
+	} else if function == "readPayLoad" {
+		return t.readPayLoad(stub)
 	}
 	fmt.Println("query did not find func: " + function)
 
@@ -132,4 +134,15 @@ func (t *SimpleChaincode) delete(stub *shim.ChaincodeStub, args []string) ([]byt
 	}
 	return nil, nil
 }
+func (t *SimpleChaincode) readPayLoad(stub *shim.ChaincodeStub) ([]byte, error) {
+	var jsonResp string
+	var err error
 
+	valAsbytes, err := stub.GetPayload()
+	if err != nil {
+		jsonResp = "{\"Error\":\"Failed to get PayLoad" + "\"}"
+		return nil, errors.New(jsonResp)
+	}
+
+	return valAsbytes, nil
+}
