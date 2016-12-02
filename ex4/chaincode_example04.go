@@ -20,8 +20,9 @@ import (
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/hyperledger/fabric/core/util"
+	"github.com/op/go-logging"
 )
-var myLogger = shim.NewLogger("PPAP")
+var myLogger = logging.MustGetLogger("PPAP")
 // This chaincode is a test for chaincode invoking another chaincode - invokes chaincode_example02
 
 // SimpleChaincode example simple Chaincode implementation
