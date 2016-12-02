@@ -21,7 +21,7 @@ import (
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/hyperledger/fabric/core/util"
 )
-
+var myLogger = shim.NewLogger("PPAP")
 // This chaincode is a test for chaincode invoking another chaincode - invokes chaincode_example02
 
 // SimpleChaincode example simple Chaincode implementation
@@ -93,7 +93,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		fmt.Printf(errStr)
 		return nil, errors.New(errStr)
 	}
-
+	myLogger.Debug("==================================================================")
+	myLogger.Debug(string(response))
+	myLogger.Debug("==================================================================")
 	fmt.Printf("Invoke chaincode successful. Got response %s", string(response))
 
 	// Write the event state back to the ledger
