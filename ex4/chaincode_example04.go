@@ -93,9 +93,9 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		fmt.Printf(errStr)
 		return nil, errors.New(errStr)
 	}
-	myLogger.Debug("==================================================================")
-	myLogger.Debug(string(response))
-	myLogger.Debug("==================================================================")
+	myLogger.Info("==================================================================")
+	myLogger.Info(string(response))
+	myLogger.Info("==================================================================")
 	fmt.Printf("Invoke chaincode successful. Got response %s", string(response))
 
 	// Write the event state back to the ledger
