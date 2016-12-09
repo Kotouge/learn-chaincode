@@ -120,8 +120,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	if err != nil {
 		return nil, err
 	}
-
-	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
+	gts, err := stub.GetTxTimestamp()
+	err = stub.PutState(B, []byte(gts.String()))
 	if err != nil {
 		return nil, err
 	}
