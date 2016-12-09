@@ -23,7 +23,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-
+	"time"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
@@ -121,7 +121,8 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 		return nil, err
 	}
 	gts, err := stub.GetTxTimestamp()
-	err = stub.PutState(B, []byte(gts.String()))
+	ts := time.Unix(gts.Seconds, int64(gts.Nanos))
+	err = stub.PutState(B, []byte(ts.String()))
 	if err != nil {
 		return nil, err
 	}
