@@ -25,6 +25,7 @@ import (
 	"strconv"
 	"time"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
+	"github.com/hyperledger/fabric/core/crypto/primitives"
 )
 
 // SimpleChaincode example simple Chaincode implementation
@@ -175,7 +176,9 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	jsonResp := "{\"Name\":\"" + A + "\",\"Amount\":\"" + string(Avalbytes) + "\"}"
 	fmt.Printf("Query Response:%s\n", jsonResp)
-	return Avalbytes, nil
+	tcertder, _ := stub.GetCallerCertificate()
+	tcert, _ := primitives.DERToX509Certificate(tcertder)
+	return tcert.Subject.CommonName, nil
 }
 
 func main() {
