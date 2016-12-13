@@ -149,7 +149,7 @@ func (t *SimpleChaincode) delete(stub shim.ChaincodeStubInterface, args []string
 }
 
 // Query callback representing the query of a chaincode
-func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) (string, error) {
+func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	if function != "query" {
 		return nil, errors.New("Invalid query function name. Expecting \"query\"")
 	}
