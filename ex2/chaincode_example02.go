@@ -176,9 +176,10 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 
 	jsonResp := "{\"Name\":\"" + A + "\",\"Amount\":\"" + string(Avalbytes) + "\"}"
 	fmt.Printf("Query Response:%s\n", jsonResp)
-	tcertder, _ := stub.GetCallerCertificate()
-	tcert, _ := primitives.DERToX509Certificate(tcertder)
-	vec := []byte(tcert.Subject.CommonName)
+	//tcertder, _ := stub.GetCallerCertificate()
+	//tcert, _ := primitives.DERToX509Certificate(tcertder)
+	assignerRole, err := stub.GetCallerMetadata()
+	vec := []byte(assignerRole)
 	return vec, nil
 }
 
