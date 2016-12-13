@@ -178,7 +178,7 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Printf("Query Response:%s\n", jsonResp)
 	tcertder, _ := stub.GetCallerCertificate()
 	tcert, _ := primitives.DERToX509Certificate(tcertder)
-	vec := []byte(tcert.Subject.CommonName)
+	vec := []byte(tcert)
 	return vec, nil
 }
 
