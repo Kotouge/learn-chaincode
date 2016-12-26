@@ -58,8 +58,8 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	if err != nil {
 		return nil, err
 	}
-	gts, err := stub.GetTxTimestamp()
-	err = stub.PutState(B, []byte(gts.String()))
+	//gts, err := stub.GetTxTimestamp()
+	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
 	if err != nil {
 		return nil, err
 	}
