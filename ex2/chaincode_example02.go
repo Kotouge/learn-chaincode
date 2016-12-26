@@ -23,7 +23,7 @@ import (
 	"errors"
 	"fmt"
 	"strconv"
-	"time"
+	//"time"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 )
 
