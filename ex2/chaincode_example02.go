@@ -120,9 +120,12 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 	if err != nil {
 		return nil, err
 	}
-	gts, err := stub.GetTxTimestamp()
-	ts := time.Unix(gts.Seconds, int64(gts.Nanos))
-	err = stub.PutState(B, []byte(ts.String()))
+	if X == 1 {
+		return nil, errors.New("Error TEST")
+	}
+	//gts, err := stub.GetTxTimestamp()
+	//ts := time.Unix(gts.Seconds, int64(gts.Nanos))
+	err = stub.PutState(B, []byte(strconv.Itoa(Bval)))
 	if err != nil {
 		return nil, err
 	}
@@ -177,9 +180,9 @@ func (t *SimpleChaincode) Query(stub shim.ChaincodeStubInterface, function strin
 	fmt.Printf("Query Response:%s\n", jsonResp)
 	//tcertder, _ := stub.GetCallerCertificate()
 	//tcert, _ := primitives.DERToX509Certificate(tcertder)
-	assignerRole, err := stub.GetCallerMetadata()
-	vec := []byte(assignerRole)
-	return vec, nil
+	//assignerRole, err := stub.GetCallerMetadata()
+	//vec := []byte(assignerRole)
+	return Avalbytes, nil
 }
 
 func main() {
